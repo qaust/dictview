@@ -12,11 +12,11 @@ class TestViewer(unittest.TestCase):
         }
         target = [
             "A",
-            "+-a <int>",
+            "\u251c\u2500a <int>",
             "B",
-            "+-b",
-            "| +-be <int>",
-            "| +-bee <int>",
+            "\u251c\u2500b",
+            "\u2502 \u251c\u2500be <int>",
+            "\u2502 \u2514\u2500bee <int>",
             "C <int>"
         ]
         result = view(d, length=2, return_obj=True)
