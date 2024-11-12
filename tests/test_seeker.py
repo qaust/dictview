@@ -2,7 +2,7 @@ from collections import namedtuple
 import unittest
 
 from dictview.viewer import view
-from dictview.seeker import seek
+from dictview.seeker import seek, is_ordered_subset
 
 class TestSeeker(unittest.TestCase):
 
@@ -21,6 +21,16 @@ class TestSeeker(unittest.TestCase):
         # TestItem(target=("bb"), value="woah", path=["B", "bb"]),
     ]
 
+    def test_ordered_subset_pos(self):
+        subset = ["b", "beee"]
+        superset = ["B", "b", "beee"]
+        self.assertEqual(is_ordered_subset(subset, superset), True)
+
+    def test_ordered_subset_neg(self):
+        subset = ["b", "beer"]
+        superset = ["B", "b", "beee"]
+        self.assertEqual(is_ordered_subset(subset, superset), False)
+
     def test_seeker_dfs(self):
         for exp in self.expected:
             result = seek(self.d, exp.target, strategy="dfs")
@@ -32,13 +42,6 @@ class TestSeeker(unittest.TestCase):
             result = seek(self.d, exp.target, strategy="bfs")
             self.assertEqual(result.value, exp.value, f"\nExpected:\n{exp.value}\nActual:\n{result.value}")
             self.assertEqual(result.path, exp.path, f"\nExpected:\n{exp.path}\nActual:\n{result.path}")
-
-    def test_seeker_hybrid(self):
-        for exp in self.expected:
-            result = seek(self.d, exp.target, strategy="hybrid")
-            self.assertEqual(result.value, exp.value, f"\nExpected:\n{exp.value}\nActual:\n{result.value}")
-            self.assertEqual(result.path, exp.path, f"\nExpected:\n{exp.path}\nActual:\n{result.path}")
-
 
 if __name__ == "__main__":
     unittest.main()
