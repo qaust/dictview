@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='dictview',  # Replace with your package name
-    version='0.1.1',
+    version='0.1.2',
     author='Quentin Auster',
     author_email='qauster1@gmail.com',
     description='A package for viewing and navigating heavily nested dictionaries',

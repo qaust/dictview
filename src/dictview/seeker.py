@@ -121,7 +121,9 @@ def seek(d: dict, tgt: list, strategy="dfs") -> DictPath:
         return candidates[0]
     except AssertionError as e:
         if len(candidates) > 1:
-            print("Try a more specific (longer) target")
+            print("Try a more specific (longer) target. These were the paths found:")
+            for candidate in candidates:
+                print(candidate)
         elif len(candidates) == 1:
             print("Target not found.")
         else:
